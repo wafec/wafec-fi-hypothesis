@@ -7,4 +7,4 @@ class FITestParameterService(Base):
     __tablename__ = 'test_parameter_service'
 
     id = Column(Integer, primary_key=True)
-    service_name = Column(String)
+    service_name = Column(Text(4000))

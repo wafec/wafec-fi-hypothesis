@@ -7,7 +7,7 @@ class FITest(Base):
     __tablename__ = 'test'
 
     id = Column(Integer, primary_key=True)
-    uuid = Column(String)
+    uuid = Column(String(255), index=True)
     created_at = Column(DateTime)
     updated_at = Column(DateTime)
 

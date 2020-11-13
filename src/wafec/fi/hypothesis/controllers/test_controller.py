@@ -11,12 +11,20 @@ __all__ = [
 class TestController(ControllerBase):
     def __init__(self):
         ControllerBase.__init__(self)
-        self.service = TestService()
+        self.test_service = TestService()
 
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('uuid', type=str, help='Test Universal Unique Identifier')
+        parser.add_argument('uuid', type=str, help='Test Universal Unique Identifier', required=True)
         args = parser.parse_args()
-        test = self.service.create(args['uuid'])
+        test = self.test_service.create(args['uuid'])
         self.db_session.commit()
-        return test.id, 201
+        return {'id': test.id}, 201
+
+    def put(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('uuid', type=str, required=True)
+        args = parser.parse_args()
+        test = self.test_service.as_last(args['uuid'])
+        self.db_session.flush()
+        return {'id': test.id}, 201

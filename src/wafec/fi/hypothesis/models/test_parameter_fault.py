@@ -10,4 +10,4 @@ class FITestParameterFault(Base):
     id = Column(Integer, primary_key=True)
     test_parameter_id = Column(Integer, ForeignKey('test_parameter.id'))
     test_parameter = relationship('FITestParameter')
-    fault_value = Column(String)
+    fault_value = Column(Text(40000))
